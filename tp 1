@@ -1,0 +1,18 @@
+bool NetworkDiscovery::Init()
+
+{
+    const unsigned short port = 50001;
+
+    if (socket.send(out, sizeof(out), server, port) != sf::Socket::Done)
+        return;
+    std::cout << "Message sent to the server: \"" << out << "\"" << std::endl;
+
+    char in[128];
+    std::size_t received;
+    sf::IpAddress sender;
+    unsigned short senderPort;
+    if (socket.receive(in, sizeof(in), received, sender, senderPort) != sf::Socket::Done)
+        return;
+    std::cout << "Message received from " << sender << ": \"" << in << "\"" << std::endl;
+
+}
